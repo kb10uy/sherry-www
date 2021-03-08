@@ -21,8 +21,16 @@ services:
     ports:
       - ':::9000:9000'
 
-  # # nginx
-  # nginx:
+  # nginx
+  nginx:
+    depends_on:
+      - 'php'
+    image: 'nginx:1.19-alpine'
+    volumes:
+      - './data/ssl:/ssl'
+    ports:
+      - '443:443'
+      - '80:80'
 
 networks:
   default:
