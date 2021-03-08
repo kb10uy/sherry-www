@@ -27,6 +27,7 @@ services:
       - 'php'
     image: 'nginx:1.19-alpine'
     volumes:
+      - './config/nginx/conf.d:/etc/nginx/conf.d'
       - './data/ssl:/ssl'
     ports:
       - '443:443'
