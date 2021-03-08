@@ -2,7 +2,7 @@ FROM php:7.4-fpm-alpine
 LABEL maintainer="kb10uy"
 
 RUN apk add --no-cache zlib-dev libpng-dev jpeg-dev libwebp-dev freetype-dev \
-                       postgresql-dev libzip-dev icu-dev bzip2-dev imagemagick-dev \
+                       postgresql-dev libzip-dev icu-dev bzip2-dev imagemagick-dev imagemagick \
                        gmp-dev autoconf build-base nodejs yarn make \
     && pecl install imagick redis apcu \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
