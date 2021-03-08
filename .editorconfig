@@ -1,0 +1,17 @@
+root = true
+
+[*]
+charset = utf-8
+newline = lf
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[Dockerfile]
+indent_size = 4
+
+[*.conf]
+indent_size = 4
+
+[*.{yml,yaml}]
+indent_size = 2
