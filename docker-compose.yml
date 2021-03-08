@@ -19,6 +19,7 @@ services:
     volumes:
       - './config/php/php.ini:/usr/local/etc/php/php.ini'
       - './data/shaarli:/var/www/shaarli'
+      - './data/kanboard:/var/www/kanboard'
     ports:
       - ':::9000:9000'
 
@@ -31,6 +32,7 @@ services:
       - './config/nginx/conf.d:/etc/nginx/conf.d'
       - './data/ssl:/ssl'
       - './data/shaarli:/var/www/shaarli'
+      - './data/kanboard:/var/www/kanboard'
     ports:
       - '443:443'
       - '80:80'
