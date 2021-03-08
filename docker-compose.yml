@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.7'
 
 services:
   # Postgres
@@ -12,12 +12,14 @@ services:
       - ':::5432:5432'
 
   # PHP
-  # php:
-  #   depends_on:
-  #     - 'postgres'
-  #   build: './images/php'
-  #   ports:
-  #     - ':::9000:9000'
+  php:
+    depends_on:
+      - 'postgres'
+    build: './images/php'
+    volumes:
+      - './config/php/php.ini:/usr/local/etc/php/php.ini'
+    ports:
+      - ':::9000:9000'
 
   # # nginx
   # nginx:
