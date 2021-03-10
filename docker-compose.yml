@@ -46,6 +46,16 @@ services:
     ports:
       - ':::3000:3000'
 
+  # mpywd
+  mpywd:
+    image: 'kb10uy/mpywd:latest'
+    env_file:
+      - './.env'
+    volumes:
+      - './config/mpywd/config.toml:/config.toml'
+    ports:
+      - ':::4545:4545'
+
   # PHP
   php:
     depends_on:
@@ -64,9 +74,10 @@ services:
   # nginx
   nginx:
     depends_on:
-      - 'php'
       - 'prometheus'
       - 'grafana'
+      - 'mpywd'
+      - 'php'
     image: 'nginx:1.19-alpine'
     volumes:
       - './config/nginx/conf.d:/etc/nginx/conf.d'
