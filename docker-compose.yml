@@ -21,24 +21,21 @@ services:
     ports:
       - ':::6379:6379'
 
-  # PHP
-  php:
-    depends_on:
-      - 'postgres'
-      - 'redis'
-    build: './images/php'
+  # Prometheus
+  prometheus:
+    image: 'prom/prometheus:2.25.0'
+    env_file:
+      - './.env'
     volumes:
-      - './config/php/php.ini:/usr/local/etc/php/php.ini'
-      - './data/shaarli:/var/www/shaarli'
-      - './data/kanboard:/var/www/kanboard'
-      - './data/taskboard:/var/www/taskboard'
-      - './data/nextcloud:/var/www/nextcloud'
+      - './config/prometheus:/etc/prometheus'
+      - './data/prometheus:/prometheus'
     ports:
-      - ':::9000:9000'
+      - ':::9090:9090'
 
   # Grafana
   grafana:
-    # depends_on:
+    depends_on:
+      - 'prometheus'
     #   - 'postgres'
     image: 'grafana/grafana:7.4.3'
     env_file:
@@ -49,10 +46,26 @@ services:
     ports:
       - ':::3000:3000'
 
+  # PHP
+  php:
+    depends_on:
+      - 'postgres'
+      - 'redis'
+    build: './images/php'
+    volumes:
+      - './config/php/php.ini:/usr/local/etc/php/php.ini'
+      - './data/shaarli:/var/www/shaarli'
+      - './data/kanboard:/var/www/kanboard'
+      # - './data/taskboard:/var/www/taskboard'
+      - './data/nextcloud:/var/www/nextcloud'
+    ports:
+      - ':::9000:9000'
+
   # nginx
   nginx:
     depends_on:
       - 'php'
+      - 'prometheus'
       - 'grafana'
     image: 'nginx:1.19-alpine'
     volumes:
@@ -60,7 +73,7 @@ services:
       - './data/ssl:/ssl'
       - './data/shaarli:/var/www/shaarli'
       - './data/kanboard:/var/www/kanboard'
-      - './data/taskboard:/var/www/taskboard'
+      # - './data/taskboard:/var/www/taskboard'
       - './data/nextcloud:/var/www/nextcloud'
     ports:
       - '443:443'
