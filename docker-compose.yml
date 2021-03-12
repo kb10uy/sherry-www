@@ -86,6 +86,8 @@ services:
       - './data/kanboard:/var/www/kanboard'
       # - './data/taskboard:/var/www/taskboard'
       - './data/nextcloud:/var/www/nextcloud'
+    extra_hosts:
+      - 'docker-host:172.16.0.1'
     ports:
       - '443:443'
       - '80:80'
