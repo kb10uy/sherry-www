@@ -1,4 +1,4 @@
 /data/*
 /source/*
-.env
+.env*
 /config/nginx/conf.d/.htpasswd

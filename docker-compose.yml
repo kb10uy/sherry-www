@@ -56,6 +56,18 @@ services:
     expose:
       - '4545'
 
+  chibisafe:
+    depends_on:
+      - 'postgres'
+    build: './images/nodejs'
+    command: 'npm run start'
+    env_file:
+      - './.env.chibisafe'
+    volumes:
+      - './data/chibisafe:/uploads'
+    ports:
+      - ':::5000'
+
   # PHP
   php:
     depends_on:
