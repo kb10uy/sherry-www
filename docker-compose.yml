@@ -18,8 +18,8 @@ services:
       - './.env'
     volumes:
       - './data/redis:/data'
-    ports:
-      - ':::6379:6379'
+    expose:
+      - '6379'
 
   # Prometheus
   prometheus:
@@ -29,8 +29,8 @@ services:
     volumes:
       - './config/prometheus:/etc/prometheus'
       - './data/prometheus:/prometheus'
-    ports:
-      - ':::9090:9090'
+    expose:
+      - '9090'
 
   # Grafana
   grafana:
@@ -44,7 +44,7 @@ services:
       - './data/grafana:/var/lib/grafana'
       - './config/grafana/grafana.ini:/etc/grafana/grafana.ini'
     ports:
-      - ':::3000:3000'
+      - '3000'
 
   # mpywd
   mpywd:
@@ -53,8 +53,8 @@ services:
       - './.env'
     volumes:
       - './config/mpywd/config.toml:/config.toml'
-    ports:
-      - ':::4545:4545'
+    expose:
+      - '4545'
 
   # PHP
   php:
@@ -68,8 +68,8 @@ services:
       - './data/kanboard:/var/www/kanboard'
       # - './data/taskboard:/var/www/taskboard'
       - './data/nextcloud:/var/www/nextcloud'
-    ports:
-      - ':::9000:9000'
+    expose:
+      - '9000'
 
   # nginx
   nginx:
