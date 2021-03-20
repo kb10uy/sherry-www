@@ -36,7 +36,7 @@ services:
   grafana:
     depends_on:
       - 'prometheus'
-    #   - 'postgres'
+    # - 'postgres'
     image: 'grafana/grafana:7.4.3'
     env_file:
       - './.env'
@@ -70,18 +70,6 @@ services:
     expose:
       - '8585'
 
-  # chibisafe:
-  #   depends_on:
-  #     - 'postgres'
-  #   build: './images/nodejs'
-  #   command: 'npm run start'
-  #   env_file:
-  #     - './.env.chibisafe'
-  #   volumes:
-  #     - './data/chibisafe:/uploads'
-  #   ports:
-  #     - ':::5000'
-
   # PHP
   php:
     depends_on:
@@ -91,7 +79,6 @@ services:
     volumes:
       - './config/php/php.ini:/usr/local/etc/php/php.ini'
       - './data/shaarli:/var/www/shaarli'
-      - './data/kanboard:/var/www/kanboard'
       - './data/nextcloud:/var/www/nextcloud'
     expose:
       - '9000'
@@ -109,7 +96,6 @@ services:
       - './config/nginx/conf.d:/etc/nginx/conf.d'
       - './data/ssl:/ssl'
       - './data/shaarli:/var/www/shaarli'
-      - './data/kanboard:/var/www/kanboard'
       - './data/nextcloud:/var/www/nextcloud'
     extra_hosts:
       - 'docker-host:172.16.0.1'
