@@ -58,6 +58,8 @@ services:
 
   # Focalboard
   focalboard:
+    depends_on:
+      - 'postgres'
     image: 'debian:bullseye-slim'
     working_dir: '/var/www/focalboard'
     command: '/var/www/focalboard/bin/focalboard-server'
@@ -108,7 +110,6 @@ services:
       - './data/ssl:/ssl'
       - './data/shaarli:/var/www/shaarli'
       - './data/kanboard:/var/www/kanboard'
-      - './data/focalboard:/var/www/focalboard'
       - './data/nextcloud:/var/www/nextcloud'
     extra_hosts:
       - 'docker-host:172.16.0.1'
