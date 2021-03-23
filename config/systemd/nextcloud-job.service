@@ -1,0 +1,12 @@
+[Unit]
+Description = Nextcloud Background Job
+After = network-online.target
+
+[Service]
+Type = oneshot
+User = root
+WorkingDirectory = /var/www
+ExecStart = /usr/bin/docker-compose exec -T --user www-data php php /var/www/nextcloud/cron.php
+
+[Install]
+WantedBy = multi-user.target
