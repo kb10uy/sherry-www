@@ -70,6 +70,19 @@ services:
     expose:
       - '8585'
 
+  # Kebisafe
+  kebisafe:
+    depends_on:
+      - 'postgres'
+      - 'redis'
+    image: 'kb10uy/kebisafe:latest'
+    env_file:
+      - './.env.kebisafe'
+    volumes:
+      - './data/kebisafe:/var/www/kebisafe'
+    expose:
+      - '9357'
+
   # PHP
   php:
     depends_on:
