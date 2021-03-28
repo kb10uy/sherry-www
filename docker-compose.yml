@@ -75,11 +75,11 @@ services:
     depends_on:
       - 'postgres'
       - 'redis'
-    image: 'kb10uy/kebisafe:latest'
+    image: 'kb10uy/kebisafe:v0.4.0'
     env_file:
       - './.env.kebisafe'
     volumes:
-      - './data/kebisafe:/var/www/kebisafe'
+      - './data/kebisafe/media:/var/www/kebisafe/media'
     expose:
       - '9357'
 
@@ -103,6 +103,7 @@ services:
       - 'grafana'
       - 'mpywd'
       - 'focalboard'
+      - 'kebisafe'
       - 'php'
     image: 'nginx:1.19-alpine'
     volumes:
@@ -110,6 +111,7 @@ services:
       - './data/ssl:/ssl'
       - './data/shaarli:/var/www/shaarli'
       - './data/nextcloud:/var/www/nextcloud'
+      - './data/kebisafe:/var/www/kebisafe'
     extra_hosts:
       - 'docker-host:172.16.0.1'
     ports:
