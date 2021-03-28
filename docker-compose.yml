@@ -75,7 +75,7 @@ services:
     depends_on:
       - 'postgres'
       - 'redis'
-    image: 'kb10uy/kebisafe:v0.4.0'
+    image: 'kb10uy/kebisafe:v0.4.1'
     env_file:
       - './.env.kebisafe'
     volumes:
